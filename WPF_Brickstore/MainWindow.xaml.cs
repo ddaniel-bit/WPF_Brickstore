@@ -20,6 +20,7 @@ namespace WPF_Brickstore
     {
         string kivalasztottFajl = "";
         List<LegoClass> legoItems = new List<LegoClass>();
+        List<string> kategoriak = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
@@ -50,24 +51,40 @@ namespace WPF_Brickstore
                     legoItems.Add(new LegoClass(id, nev, kategoria, szin, qty));
                 }
                 dgElemek.ItemsSource = legoItems;
+                foreach (var item in legoItems)
+                {
+                    if (!kategoriak.Contains(item.CategoryName))
+                    {
+                        kategoriak.Add(item.CategoryName);
+                    }
+                }
+                cbKat.ItemsSource = kategoriak;
             }
             else
             {
-                fajlValasztas();
+                MessageBox.Show("Nem választottál ki fáljt, vagy a formátum nem mefelelő.");
             }
         }
         private void Szures()
         {
             string keresettNev = txtNev.Text.ToLower();
             string keresettAzon = txtAzon.Text.ToLower();
+            string keresettKat = cbKat.Text.ToLower();
 
             var szurtLista = legoItems.Where(item =>
                 (string.IsNullOrEmpty(keresettNev) || item.ItemName.ToLower().StartsWith(keresettNev)) &&
-                (string.IsNullOrEmpty(keresettAzon) || item.ItemID.ToString().ToLower().StartsWith(keresettAzon))
+                (string.IsNullOrEmpty(keresettAzon) || item.ItemID.ToString().ToLower().StartsWith(keresettAzon)) &&
+                (string.IsNullOrEmpty(keresettKat) || item.CategoryName.ToLower().StartsWith(keresettKat))
             ).ToList();
 
             dgElemek.ItemsSource = szurtLista;
         }
 
+        private void btnFajl_Click(object sender, RoutedEventArgs e)
+        {
+            legoItems.Clear();
+            fajlValasztas();
+            
+        }
     }
 }
