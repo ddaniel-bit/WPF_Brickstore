@@ -86,5 +86,12 @@ namespace WPF_Brickstore
             fajlValasztas();
             
         }
+
+        private void btnTorles_Click(object sender, RoutedEventArgs e)
+        {
+            cbKat.SelectedItem = null;
+            txtNev.Text = "";
+            txtAzon.Text = "";
+        }
     }
 }

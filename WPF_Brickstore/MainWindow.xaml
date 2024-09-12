@@ -22,12 +22,13 @@ Background="LightGreen"/>
             <Label Content="Elem kategória neve"/>
             <ComboBox x:Name="cbKat"/>
             <Button x:Name="btnSzukit"
-                    Margin="0 20 0 0"
+                    Margin="0 10 0 0"
                     Content="Szűrés a feltételekre" Click="btnSzukit_Click"/>
             <Button x:Name="btnFajl"
-        Margin="0 20 0 0"
+        Margin="0 10 0 0"
         Content="Fájl kiválasztása" Click="btnFajl_Click"/>
-
+            <Button x:Name="btnTorles" Content="Szűrők törlése"
+                    Margin="0 10 0 0" Click="btnTorles_Click"/>
         </StackPanel>
         <DataGrid  x:Name="dgElemek" 
                    Grid.Column="1"
