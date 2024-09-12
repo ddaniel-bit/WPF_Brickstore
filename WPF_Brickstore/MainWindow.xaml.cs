@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using Microsoft.Win32;
+
 
 namespace WPF_Brickstore
 {
@@ -24,7 +26,6 @@ namespace WPF_Brickstore
         public MainWindow()
         {
             InitializeComponent();
-            fajlValasztas();
         }
 
         private void btnSzukit_Click(object sender, RoutedEventArgs e)
@@ -79,11 +80,25 @@ namespace WPF_Brickstore
 
             dgElemek.ItemsSource = szurtLista;
         }
+        private void MappaValasztas()
+        {
+            var dialog = new OpenFolderDialog()
+            {
+                Title = "Foo",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                Multiselect = true
+            };
+
+            string folderName = "";
+            if (dialog.ShowDialog() == true)
+            {
+                folderName = dialog.FolderName;
+            }
+        }
 
         private void btnFajl_Click(object sender, RoutedEventArgs e)
         {
-            legoItems.Clear();
-            fajlValasztas();
+            
             
         }
 
